@@ -13,7 +13,31 @@ The language must be Turing Complete. This means it must have the following oper
 - Increment & Decrement
 The first three can actually be done by allowing the creation of variables and lists.
 
-On top of this, I will provide multiplication, division, and exponents, as well as a user input and and output.
+On top of this, I will provide multiplication, division, modulus, and exponents, as well as a user input and and output.
+
+### Arithmetic Operators
+|Symbol|Operator|Arity|
+|-|-------------|-|
+|+|Addition|2|
+|-|Subtraction|2|
+|*|Multiplication|2|
+|/|Division|2|
+|%|Modulus|2|
+|^|Exponent|2|
+
+### List Operators
+|Symbol|Operator|Arity|
+|-|-------------|-|
+|++|Concatenation|2|
+|\|\||Length|1|
+
+### Variable Operators
+|Symbol|Operator|Arity|
+|-|-------------|-|
+|=|Storage|3|
+|$|Retrieval|1|
+
+Storage takes three operands because we need to take a type, variable name, and the value.
 
 ## Language Structure
 The language will work on a stack. This stack will contain values and pointers to data, on which operations will occur. Expressions will be written in Reverse Polish Notation (AKA PostFix Notation) to simplify the language. This also benefits the user as the order of operations for RPN is unambiguous.
