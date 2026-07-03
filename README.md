@@ -54,7 +54,7 @@ Storage takes three operands because we need to take a type, variable name, and 
 |-|-------------|-|
 |&|AND|2|
 |\||OR|2|
-|¬|NOT|1|
+|`|NOT|1|
 
 #### Other Operators
 |Symbol|Operation|Arity|
