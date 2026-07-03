@@ -2,8 +2,34 @@
 #include "queue.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #define BUFFER_LEN 256
+
+typedef enum {
+    // Operators
+    TOKEN_ADD,
+    TOKEN_SUB,
+    TOKEN_MUL,
+    TOKEN_DIV,
+    TOKEN_MOD,
+    TOKEN_EXP,
+    TOKEN_CON, // concatenate
+    TOKEN_LEN, // length
+    TOKEN_STO, // store
+    TOKEN_OUT,
+    TOKEN_IN,
+    // Types
+    TOKEN_INT,
+    TOKEN_STRING,
+    // Variable
+    TOKEN_VARIABLE
+} Token;
+
+typedef struct {
+    Token token;
+
+} Lex;
 
 Queue* splitter(char* text){
     
@@ -32,6 +58,59 @@ Queue* splitter(char* text){
     }
 
     return words;
+}
+
+Queue* tokeniser(Queue* words){
+    Lex* tok = (Lex*) malloc(sizeof(Lex));
+    // check if a word is a known operator
+    char* word = (char*)pop_queue(words);
+    printf("%s",word);
+    switch (*word)
+    {
+        case '+':
+            tok->token = TOKEN_ADD;    
+            break;
+        case '-':
+            tok->token=TOKEN_SUB;
+            break;
+        case '*':
+            tok->token=TOKEN_MUL;
+            break;
+        case '/':
+            tok->token=TOKEN_DIV;
+            break;
+        case '%':
+            tok->token=TOKEN_MOD;
+            break;
+        case '^':
+            tok->token=TOKEN_EXP;
+            break;
+        case ',':
+            tok->token=TOKEN_CON;
+            break;
+        case '|':
+            tok->token=TOKEN_LEN;
+            break;
+        case '=':
+            tok->token=TOKEN_STO;
+            break;
+        case ':':
+            tok->token=TOKEN_OUT;
+            break;
+        case '~':
+            tok->token=TOKEN_IN;
+            break;
+    }
+    
+
+    // check if a word is a known data type (int, bool, string)
+    // Since it is not necessarily a single-character word, we need to do string comparisons instead now.
+
+
+
+    // if neither is true, it must be a variable of some kind.
+
+    free(word);
 }
 
 Queue* lexer(char* sourceCode){
