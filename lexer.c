@@ -20,6 +20,9 @@ typedef enum {
     TOKEN_STO, // store
     TOKEN_OUT,
     TOKEN_IN,
+    TOKEN_AND,
+    TOKEN_OR,
+    TOKEN_NOT,
     // Types
     TOKEN_INT,
     TOKEN_CHAR,
@@ -95,7 +98,7 @@ Queue* tokeniser(Queue* words){
             case ',':
                 tok->token=TOKEN_CON;
                 break;
-            case '|':
+            case '$':
                 tok->token=TOKEN_LEN;
                 break;
             case '=':
@@ -106,6 +109,15 @@ Queue* tokeniser(Queue* words){
                 break;
             case '~':
                 tok->token=TOKEN_IN;
+                break;
+            case '&':
+                tok->token=TOKEN_AND;
+                break;
+            case '|':
+                tok->token=TOKEN_OR;
+                break;
+            case '¬':
+                tok->token=TOKEN_NOT;
                 break;
         }
         
