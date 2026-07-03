@@ -25,7 +25,7 @@ typedef enum {
     TOKEN_NOT,
     // Types
     TOKEN_INT,
-    TOKEN_CHAR,
+    TOKEN_STR,
     TOKEN_BOOL,
     // Variable
     TOKEN_VARIABLE
@@ -145,6 +145,19 @@ Queue* tokeniser(Queue* words){
             tok->value=p;
         }
 
+        if(word[0]=='"'){
+            tok->token=TOKEN_STR;
+            p=(char*) malloc(BUFFER_LEN);
+
+            int i=1;
+            while(word[1]!='"')
+                i++;
+            word[i]='\0';
+
+            strcpy(p,word+1);
+            tok->value=p;
+        }
+
         // if neither is true, it must be a variable of some kind.
         if(tok->token == TOKEN_NULL){
             strcpy(tok->name,word);
@@ -169,3 +182,4 @@ int main(int argc, char** argv){
 
     free(source);
 }
+
