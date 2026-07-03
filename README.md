@@ -59,4 +59,4 @@ Storage takes three operands because we need to take a type, variable name, and 
 The language will work on multiple stacks, one for each data type. Stacks will contain values and pointers to data, on which operations will occur. Expressions will be written in Reverse Polish Notation (AKA PostFix Notation) to simplify the language. This also benefits the user as the order of operations for RPN is unambiguous.
 
 ### Libraries
-I will make use of a linked list library we used in the First Year of my CS degree, as it is easily accessible and modifiable, and I have experience using it. I will also include the Stack extension to the library because it is useful.
+I will make use of a linked list library we used in the First Year of my CS degree, as it is easily accessible and modifiable, and I have experience using it. I will also include the Stack and Queue extensions to the library because they are useful.
