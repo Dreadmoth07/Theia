@@ -37,6 +37,8 @@ typedef struct {
     void* value;
 } Lex;
 
+void print_Lex(void*);
+
 Queue* splitter(char* text){
     
     // Creating the list of words.
@@ -67,6 +69,7 @@ Queue* splitter(char* text){
 }
 
 Queue* tokeniser(Queue* words){
+    Queue* tokens = initialise_queue();
     Lex* tok = (Lex*) malloc(sizeof(Lex));
     while(peek_queue(words)){
         strcpy(tok->name,"");
@@ -74,7 +77,6 @@ Queue* tokeniser(Queue* words){
 
         // check if a word is a known operator
         char* word = (char*)pop_queue(words);
-        printf("%s",word);
         switch (*word)
         {
             case '+':
@@ -116,7 +118,7 @@ Queue* tokeniser(Queue* words){
             case '|':
                 tok->token=TOKEN_OR;
                 break;
-            case '¬':
+            case '`':
                 tok->token=TOKEN_NOT;
                 break;
         }
@@ -138,7 +140,7 @@ Queue* tokeniser(Queue* words){
             *p=1;
             tok->value=p;
         }
-        else if(strcmp(word,"false")){
+        else if(strcmp(word,"false")==0){
             tok->token=TOKEN_BOOL;
             p=malloc(sizeof(int));
             *p=0;
@@ -150,7 +152,7 @@ Queue* tokeniser(Queue* words){
             p=(char*) malloc(BUFFER_LEN);
 
             int i=1;
-            while(word[1]!='"')
+            while(word[i]!='"')
                 i++;
             word[i]='\0';
 
@@ -164,13 +166,18 @@ Queue* tokeniser(Queue* words){
             tok->token = TOKEN_VARIABLE;
         }
 
+        push_queue(tokens,tok,sizeof(Lex));
+
         free(word);
     }
+    return tokens;
 }
 
 Queue* lexer(char* sourceCode){
     Queue* words = splitter(sourceCode);
     Queue* tokens = tokeniser(words);
+    print_queue(tokens,print_Lex);
+    return tokens;
 }
 
 int main(int argc, char** argv){
@@ -178,8 +185,72 @@ int main(int argc, char** argv){
     printf("Enter Source Code: ");
     scanf("%[^\n]s",source); // ooh scanset specifier - this will only stop when it hits a newline.
     
-    Queue* words = lexer(source);
+    Queue* tokens = lexer(source);
 
     free(source);
 }
 
+void print_Lex(void* ptr){
+    Lex* p = (Lex*) ptr;
+    switch (p->token)
+    {
+    case TOKEN_ADD:
+        printf("Addition");
+        break;
+    case TOKEN_SUB:
+        printf("Subtraction");
+        break;
+    case TOKEN_MUL:
+        printf("Multiplication");
+        break;
+    case TOKEN_DIV:
+        printf("Division");
+        break;
+    case TOKEN_MOD:
+        printf("Modulus");
+        break;
+    case TOKEN_EXP:
+        printf("Exponentiation");
+        break;
+    case TOKEN_CON:
+        printf("Concatenation");
+        break;
+    case TOKEN_LEN:
+        printf("Length");
+        break;
+    case TOKEN_STO:
+        printf("Storage");
+        break;
+    case TOKEN_AND:
+        printf("Logical AND");
+        break;
+    case TOKEN_OR:
+        printf("Logical OR");
+        break;
+    case TOKEN_NOT:
+        printf("Logical NOT");
+        break;
+    case TOKEN_OUT:
+        printf("Output");
+        break;
+    case TOKEN_IN:
+        printf("Input");
+        break;
+    case TOKEN_STR:
+        printf("String: %s",(char*)(p->value));
+        break;
+    case TOKEN_INT:
+        printf("Int: %d",*(int*)(p->value));        
+        break;
+    case TOKEN_BOOL:
+        printf("Bool: %d",*(int*)(p->value));
+        break;
+    case TOKEN_VARIABLE:
+        printf("Variable. Name = %s",p->name);
+        break;
+    case TOKEN_NULL:
+        printf("-------------NULL-------------");
+        break;
+    }
+    printf("\n");
+}
