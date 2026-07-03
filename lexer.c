@@ -152,7 +152,7 @@ Queue* tokeniser(Queue* words){
             p=(char*) malloc(BUFFER_LEN);
 
             int i=1;
-            while(word[i]!='"')
+            while(word[i]!='"' && word[i]!='\0')
                 i++;
             word[i]='\0';
 
