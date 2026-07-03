@@ -49,6 +49,13 @@ On top of this, I will provide multiplication, division, modulus, and exponents,
 
 Storage takes three operands because we need to take a type, variable name, and the value.
 
+#### Logical operators
+|Symbol|Operation|Arity|
+|-|-------------|-|
+|&|AND|2|
+|\||OR|2|
+|¬|NOT|1|
+
 #### Other Operators
 |Symbol|Operation|Arity|
 |-|-------------|-|
