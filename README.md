@@ -39,8 +39,8 @@ On top of this, I will provide multiplication, division, modulus, and exponents,
 #### List & String Operators
 |Symbol|Operation|Arity|
 |-|-------------|-|
-|++|Concatenation|2|
-|\|\||Length|1|
+|,|Concatenation|2|
+|$|Length|1|
 
 #### Variable Operators
 |Symbol|Operation|Arity|
@@ -53,6 +53,7 @@ Storage takes three operands because we need to take a type, variable name, and 
 |Symbol|Operation|Arity|
 |-|-------------|-|
 |:|Output|1|
+|~|Input|2|
 
 ### Language Structure
 The language will work on multiple stacks, one for each data type. Stacks will contain values and pointers to data, on which operations will occur. Expressions will be written in Reverse Polish Notation (AKA PostFix Notation) to simplify the language. This also benefits the user as the order of operations for RPN is unambiguous.
