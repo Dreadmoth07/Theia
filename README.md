@@ -41,6 +41,7 @@ Storage takes three operands because we need to take a type, variable name, and 
 
 ### Other Operators
 |Symbol|Operation|Arity|
+|-|-------------|-|
 |:|Output|1|
 
 ## Language Structure
