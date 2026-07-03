@@ -46,7 +46,6 @@ On top of this, I will provide multiplication, division, modulus, and exponents,
 |Symbol|Operation|Arity|
 |-|-------------|-|
 |=|Storage|3|
-|$|Retrieval|1|
 
 Storage takes three operands because we need to take a type, variable name, and the value.
 
