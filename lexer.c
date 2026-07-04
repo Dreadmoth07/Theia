@@ -51,12 +51,21 @@ Queue* splitter(char* text){
     while(text[i] != '\0'){
         word = (char*) malloc(BUFFER_LEN);
         j = 0;
-        while(text[i] != ' ' && text[i] != '\n' && text[i] != '\0'){
-            word[j] = text[i];
-            i++;
-            j++;
+        if(text[i]!='"'){
+            while(text[i] != ' ' && text[i] != '\n' && text[i] != '\0'){
+                word[j] = text[i];
+                i++;
+                j++;
+            }
         }
-
+        else if(text[i]=='"'){
+            do{
+                word[j] = text[i];
+                i++;
+                j++;
+            }while((text[i] != '"' && text[i] != '\0'));
+            i++;
+        }
         word[j] = '\0';
         j++;
         i++;
