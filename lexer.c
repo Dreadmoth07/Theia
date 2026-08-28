@@ -147,7 +147,7 @@ Queue* tokeniser(Queue* words){
             tok->token=TOKEN_BOOL;
             p=malloc(sizeof(int));
             *p=1;
-            tok->value=p;
+            tok->value=(void*)p;
         }
         else if(strcmp(word,"false")==0){
             tok->token=TOKEN_BOOL;
@@ -179,6 +179,7 @@ Queue* tokeniser(Queue* words){
 
         free(word);
     }
+    free_queue(words);
     return tokens;
 }
 
@@ -194,8 +195,7 @@ int main(int argc, char** argv){
     printf("Enter Source Code: ");
     scanf("%[^\n]s",source); // ooh scanset specifier - this will only stop when it hits a newline.
     
-    Queue* tokens = lexer(source);
-
+    lexer(source);
     free(source);
 }
 
@@ -246,13 +246,13 @@ void print_Lex(void* ptr){
         printf("Input");
         break;
     case TOKEN_STR:
-        printf("String: %s",(char*)(p->value));
+        printf("String: %s",((char*)(p->value)));
         break;
     case TOKEN_INT:
-        printf("Int: %d",*(int*)(p->value));        
+        printf("Int: %d",*((int*)(p->value)));        
         break;
     case TOKEN_BOOL:
-        printf("Bool: %d",*(int*)(p->value));
+        printf("Bool: %d",*((int*)(p->value)));
         break;
     case TOKEN_VARIABLE:
         printf("Variable. Name = %s",p->name);
